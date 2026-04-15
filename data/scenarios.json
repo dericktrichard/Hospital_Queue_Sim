@@ -1,11 +1,11 @@
 {
   "OPD_morning_rush": {
-    "description": "Outpatient Dept - morning peak (KNH-style)",
+    "description": "Outpatient Dept - morning peak (KNH-like)",
     "lambda": 15,
     "mu": 12,
-    "servers": 1,
+    "servers": 2,
     "erlang_k": null,
-    "model": "MM1"
+    "model": "MMK"
   },
   "pharmacy_counter": {
     "description": "Pharmacy - 3 servers, Erlang service",

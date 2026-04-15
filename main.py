@@ -15,22 +15,26 @@ def run_scenario(name, cfg):
     lam, mu, k = cfg["lambda"], cfg["mu"], cfg["servers"]
 
     # Analytical
-    if cfg["model"] == "MM1":
-        m = MM1(lam, mu)
-    elif cfg["model"] == "MMK":
-        m = MMK(lam, mu, k)
-    elif cfg["model"] == "MG1":
-        m = MG1(lam, mu, cfg.get("Cs2", 1.0))
+    try:
+        if cfg["model"] == "MM1":
+            m = MM1(lam, mu)
+        elif cfg["model"] == "MMK":
+            m = MMK(lam, mu, k)
+        elif cfg["model"] == "MG1":
+            m = MG1(lam, mu, cfg.get("Cs2", 1.0))
+        print_results(f"[Analytical] {name}", m.summary())
+    except ValueError as e:
+        console.print(f"[bold red]⚠ Analytical model skipped: {e}[/bold red]")
+        console.print(f"[dim]Tip: ρ must be < 1. Try increasing servers or reducing λ.[/dim]\n")
 
-    print_results(f"[Analytical] {name}", m.summary())
-
-    # Simulation
+    # Simulation (runs regardless — SimPy handles overloaded systems)
     sim = HospitalSimulator(lam, mu, num_servers=k,
                             sim_hours=8,
                             erlang_k=cfg.get("erlang_k"))
     sim.run(department=name)
     print_results(f"[Simulation - 8hr run] {name}", sim.results())
 
+    
 def main():
     console.print("\n[bold cyan]🏥 Nairobi Hospital Queuing Analysis System[/bold cyan]")
     console.print("[dim]Models: M/M/1, M/M/K, M/G/1 | Simulation via SimPy[/dim]\n")
