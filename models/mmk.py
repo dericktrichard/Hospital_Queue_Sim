@@ -1,6 +1,3 @@
-# models/mmk.py
-# Model VII: M/M/K : ∞ / FCFS
-
 import math
 
 class MMK:

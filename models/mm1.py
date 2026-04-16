@@ -1,6 +1,3 @@
-# models/mm1.py
-# Model I: M/M/1 : ∞ / FCFS
-
 class MM1:
     def __init__(self, lam, mu):
         """

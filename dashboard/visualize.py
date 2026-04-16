@@ -1,4 +1,3 @@
-# dashboard/visualize.py
 import matplotlib.pyplot as plt
 import numpy as np
 from simulation.simulator import HospitalSimulator

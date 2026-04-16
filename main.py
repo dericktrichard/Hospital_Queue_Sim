@@ -1,4 +1,3 @@
-# main.py
 import json
 from rich.console import Console
 from rich.prompt import Prompt, IntPrompt, FloatPrompt

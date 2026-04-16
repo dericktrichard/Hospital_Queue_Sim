@@ -1,6 +1,3 @@
-# models/mg1.py
-# Model V/VI: M/G/1 and M/Ek/1 (Erlang) using P-K formula
-
 class MG1:
     """
     M/G/1 queue — general service time via Pollaczek-Khinchine formula.

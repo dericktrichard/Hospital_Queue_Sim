@@ -1,5 +1,3 @@
-# simulation/patient.py
-
 class Patient:
     def __init__(self, pid, arrival_time, department):
         self.pid          = pid

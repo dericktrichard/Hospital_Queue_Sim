@@ -1,4 +1,3 @@
-# simulation/simulator.py
 import simpy
 import numpy as np
 from simulation.patient import Patient
