@@ -24,7 +24,7 @@
     "model": "MMK"
   },
   "inspection_station": {
-    "description": "QC Inspection (from textbook example)",
+    "description": "QC Inspection",
     "lambda": 2,
     "mu": 2.4,
     "servers": 1,

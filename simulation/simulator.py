@@ -9,9 +9,9 @@ class HospitalSimulator:
         self.k          = num_servers
         self.sim_hours  = sim_hours
         self.seed       = seed
-        self.erlang_k   = erlang_k   # None = exponential service
+        self.erlang_k   = erlang_k   
         self.patients   = []
-        self.queue_log  = []   # (time, queue_length)
+        self.queue_log  = [] 
 
     def _service_time(self, rng):
         if self.erlang_k:
