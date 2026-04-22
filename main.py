@@ -6,6 +6,7 @@ from models.mmk import MMK
 from models.mg1 import MG1
 from simulation.simulator import HospitalSimulator
 from analytics.reporter import print_results
+from analytics.schedule_comparison import run_schedule_comparison   # ← NEW
 
 console = Console()
 
@@ -26,14 +27,13 @@ def run_scenario(name, cfg):
         console.print(f"[bold red]⚠ Analytical model skipped: {e}[/bold red]")
         console.print(f"[dim]Tip: ρ must be < 1. Try increasing servers or reducing λ.[/dim]\n")
 
-    # Simulation (runs regardless — SimPy handles overloaded systems)
+    # Simulation
     sim = HospitalSimulator(lam, mu, num_servers=k,
                             sim_hours=8,
                             erlang_k=cfg.get("erlang_k"))
     sim.run(department=name)
     print_results(f"[Simulation - 8hr run] {name}", sim.results())
 
-    
 def main():
     console.print("\n[bold cyan]🏥 Nairobi Hospital Queuing Analysis System[/bold cyan]")
     console.print("[dim]Models: M/M/1, M/M/K, M/G/1 | Simulation via SimPy[/dim]\n")
@@ -46,9 +46,11 @@ def main():
         console.print(f"  {i}. {k} — {v['description']}")
 
     console.print("  5. Custom input")
-    console.print("  6. Run ALL scenarios\n")
+    console.print("  6. Run ALL scenarios")
+    console.print("  7. [bold cyan]Full day schedule comparison (all departments)[/bold cyan]")  # ← NEW
+    console.print()
 
-    choice = Prompt.ask("Select", choices=["1","2","3","4","5","6"])
+    choice = Prompt.ask("Select", choices=["1","2","3","4","5","6","7"])   # ← 7 added
 
     keys = list(scenarios.keys())
     if choice in ["1","2","3","4"]:
@@ -57,6 +59,8 @@ def main():
     elif choice == "6":
         for name, cfg in scenarios.items():
             run_scenario(name, cfg)
+    elif choice == "7":                    # ← NEW block
+        run_schedule_comparison()
     else:
         # Custom
         lam = FloatPrompt.ask("Arrival rate λ (per hr)")
