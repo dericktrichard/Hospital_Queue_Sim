@@ -6,7 +6,7 @@ class MM1:
         """
         self.lam = lam
         self.mu = mu
-        self.rho = lam / mu  # traffic intensity
+        self.rho = lam / mu
 
     def validate(self):
         if self.rho >= 1:
